@@ -44,12 +44,37 @@
 <main>  
   <section class="section-product">
     <div class="pictures-ctn">
-      <img class='picture' src="./assets/image-product-1.jpg" alt="product thumbnail">
+      <div class="picture-container">
+        <img class='picture' src="./assets/image-product-1.jpg" alt="product thumbnail">
+        <div class="arrows">
+          <button>
+            <img src="./assets/icon-previous.svg" alt="previous icon">
+          </button>
+          <button>
+            <img src="./assets/icon-next.svg" alt="next icon">
+          </button>          
+        </div>
+      </div>      
       <div class="thumbnails">
-        <img src="./assets/image-product-1-thumbnail.jpg" alt="thumbnail 1">
-        <img src="./assets/image-product-2-thumbnail.jpg" alt="thumbnail 2">
-        <img src="./assets/image-product-3-thumbnail.jpg" alt="thumbnail 3">
-        <img src="./assets/image-product-4-thumbnail.jpg" alt="thumbnail 4">        
+        <div class="thumbnail-ctn active">
+          <img src="./assets/image-product-1-thumbnail.jpg" alt="thumbnail 1">
+          <div class="overlay"></div>
+        </div>
+       
+        <div class="thumbnail-ctn">
+          <img src="./assets/image-product-2-thumbnail.jpg" alt="thumbnail 2">
+          <div class="overlay"></div>
+        </div>
+
+        <div class="thumbnail-ctn">
+          <img src="./assets/image-product-3-thumbnail.jpg" alt="thumbnail 3">
+          <div class="overlay"></div>
+        </div>
+        
+        <div class="thumbnail-ctn">
+          <img src="./assets/image-product-4-thumbnail.jpg" alt="thumbnail 4">   
+          <div class="overlay"></div>
+        </div>     
       </div>
     </div>
     <div class="content-ctn">

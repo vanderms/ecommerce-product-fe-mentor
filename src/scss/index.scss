@@ -154,14 +154,59 @@ body {
   }
 
   .pictures-ctn{
-    .picture{
+
+    .picture-container{
       width: 100%;
-      height: auto;
-      border-radius: 20px;
-      @include media($md){
-        border-radius: 0px;
+      padding-bottom: 100%;
+      position: relative;
+
+      .picture{
+        width: 100%;
+        height: auto;
+        position: absolute;
+        top: 0px;
+        z-index: 0;
+        border-radius: 20px;
+        @include media($md){
+          border-radius: 0px;
+        }
       }
+
+      .arrows{
+        display: none;
+        @include media($md){
+          @include size(100%, 100%);
+          position: absolute;
+          display: grid;
+          grid-auto-flow: column;
+          justify-content: space-between;
+          align-items: center;
+          z-index: 2;
+          top: 0px;
+          padding: 0px 16px;
+
+          button{
+            @include size(42px, 42px);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0px;
+            border: none;
+            background-color: white;
+
+            img{
+              height: 13px;
+              width: auto;
+            }
+          }
+
+        }
+      }
+
     }
+
+   
 
     .thumbnails { 
       margin-top: 30px;     
@@ -169,12 +214,57 @@ body {
       grid-template-columns: repeat(4, 1fr);
       gap: 30px;
       @include hide-on($md);
-
-      img{
+      background-color: white;
+      .thumbnail-ctn {
+        position: relative;
         width: 100%;
-        height: auto;
+        padding-bottom: 100%;
         border-radius: 10px;
+        cursor: pointer;
+
+        img {
+          position: absolute;
+          top: 0px;
+          left: 0px;
+          width: 100%;
+          height: auto;
+          border-radius: 10px;
+        }
+
+        .overlay{
+          display: none;          
+          background-color: var(--primary-pale);
+          position: absolute;
+          z-index: 1;           
+          border-radius: 10px;
+         
+        }
+
+        &.active, &.active:hover {
+          img {
+            border: 2px solid var(--primary);
+          }
+          .overlay {
+            @include size(calc(100% - 4px), calc(100% - 4px));
+            display: unset;            
+            opacity: 0.75;
+            top: 2px;
+            left: 2px;
+          }
+        }
+
+        &:hover{
+          .overlay{
+            @include size(100%, 100%);
+            display: unset;
+            opacity: 0.5;
+            top: 0px;
+            left: 0px;
+          }
+
+        }
       }
+      
     }
   }
 
