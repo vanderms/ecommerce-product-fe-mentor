@@ -182,10 +182,11 @@ body {
       }
     }
 
-    .price-ctn{
+    .price-ctn {
       margin-top: 35px;
       display: grid;
       grid-auto-flow: row;
+      gap: 16px;
 
       .price-with-discount{
         display: grid;
@@ -199,8 +200,72 @@ body {
           font-size: 28px;
           font-weight: bold;
         }
+
+        .discount {
+          display: inline-block;
+          padding: 4px 8px;
+          border-radius: 5px;
+          font-weight: bold;
+          color: var(--primary);
+          background-color: var(--primary-pale);
+        }
       }
 
+      .price-without-discount{       
+        color: var(--grayish-blue);
+        text-decoration: line-through;
+        font-weight: 700;
+      }
+    }
+
+    .cart-form{
+      margin-top: 35px;   
+      display: grid;
+      grid-auto-flow: column;
+      justify-content: start;
+      align-items: center;
+      gap: 20px;   
+
+      .quantity-ctn{
+        @include size(160px, 56px);
+        background-color: var(--light-grayish-blue);
+        display: inline-grid;
+        grid-auto-flow: column;
+        align-items: center;
+        justify-content: space-evenly;
+
+        button{
+          @include size(24px, 24px);
+          display: grid;
+          justify-content: center;
+          align-items: center;
+          border: none;
+          background-color: inherit;
+          cursor: pointer;
+        }
+
+        .quantity{
+          font-weight: 700;
+        }
+      }
+
+      .add-to-cart{
+        background-color: var(--primary);
+        color: var(--primary-pale); 
+        border-radius: 12px;
+        @include size(272px, 56px);
+        border: none;
+        display: inline-grid;
+        grid-auto-flow: column;
+        justify-content: center;
+        align-items: center;
+        gap: 16px;
+        font-weight: 700;
+        cursor: pointer;
+        svg{
+          transform: scale(0.75);
+        }
+      }
     }
 
 
