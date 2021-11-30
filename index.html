@@ -43,15 +43,19 @@
   
 <main>  
   <section class="section-product">
+    <div class="backdrop"></div>
     <div class="pictures-ctn">
+      <button class='close-modal' aria-label = 'close modal'>
+        <svg width="14" height="15" xmlns="http://www.w3.org/2000/svg"><path d="m11.596.782 2.122 2.122L9.12 7.499l4.597 4.597-2.122 2.122L7 9.62l-4.595 4.597-2.122-2.122L4.878 7.5.282 2.904 2.404.782l4.595 4.596L11.596.782Z" fill="#FFF" fill-rule="evenodd"/></svg>
+      </button>
       <div class="picture-container">
         <img data-current='0' class='picture' src="./assets/image-product-1.jpg" alt="product thumbnail">
         <div class="arrows">
-          <button>
-            <img class='previous-btn' src="./assets/icon-previous.svg" alt="previous icon">
+          <button class='previous-btn'>
+            <img  src="./assets/icon-previous.svg" alt="previous icon">
           </button>
-          <button>
-            <img class='next-btn' src="./assets/icon-next.svg" alt="next icon">
+          <button class='next-btn'>
+            <img src="./assets/icon-next.svg" alt="next icon">
           </button>          
         </div>
       </div>      

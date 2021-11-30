@@ -1,33 +1,85 @@
 
 class Carousel{
   
+  private scrollY: number = 0;
  
-  private thumbnails: NodeListOf<HTMLElement>;      
-  private nextBtn: HTMLElement;
-  private previousBtn: HTMLElement;
-
-
   constructor(){
-    const root = document.querySelector('.pictures-ctn') as HTMLElement;
-    const clone = root.cloneNode(true) as HTMLElement;
-    clone.classList.add('clone');
+    const root = document.querySelector('.section-product') as HTMLElement;
+    const clone = this.createClone(root);
+   
  
-    this.thumbnails = root.querySelectorAll('.thumbnail-ctn') as NodeListOf<HTMLElement>;
-    this.thumbnails.forEach(thumbnail => {     
+    this.setThumbnails(root);
+    this.setArrows(root);
+
+
+    this.setThumbnails(clone);
+    this.setArrows(clone);
+
+    const image = root.querySelector('.picture') as HTMLElement;
+    image.addEventListener('click', () => this.openClone(clone, root));
+    
+    const closeModal = clone.querySelector('.close-modal') as HTMLElement;
+    closeModal.addEventListener('click', ()=>{
+      this.closeClone(clone, root);
+    })
+
+    const backdrop = clone.querySelector('.backdrop') as HTMLElement;
+    
+    backdrop.addEventListener('click', ()=>{
+      this.closeClone(clone, root);
+    })
+
+  }
+
+
+  private openClone(clone : HTMLElement, root: HTMLElement){   
+    
+    document.body.appendChild(clone);
+    const y: number = root.getBoundingClientRect().y;
+    this.scrollY = window.scrollY;
+        
+    root.setAttribute('style', `
+      position: fixed;
+      top: ${y}px;
+    `);
+
+    window.scrollTo(0, 0);
+  }
+
+  private closeClone(clone : HTMLElement, root: HTMLElement){
+    clone.remove();
+    root.setAttribute('style', '');    
+    window.scrollTo(0, this.scrollY);
+    
+  }
+
+
+  private setThumbnails(root: HTMLElement){
+    const thumbnails = root.querySelectorAll('.thumbnail-ctn') as NodeListOf<HTMLElement>;
+    thumbnails.forEach(thumbnail => {     
       const image = thumbnail.querySelector('img') as HTMLImageElement;     
       thumbnail.addEventListener('click', () => this.setActive(root, image.src));
     });
+  }
 
 
-    this.previousBtn = root.querySelector('.previous-btn') as HTMLElement;    
-    this.previousBtn.addEventListener('click', () =>{
+  private setArrows(root: HTMLElement){
+    const previousBtn = root.querySelector('.previous-btn') as HTMLElement;    
+    previousBtn.addEventListener('click', () =>{
       this.setActiveOnArrowClick(root, number => ((number + 3) % 4));
     });
 
-    this.nextBtn = root.querySelector('.next-btn') as HTMLElement;    
-    this.nextBtn.addEventListener('click', () =>{
+    const nextBtn = root.querySelector('.next-btn') as HTMLElement;    
+    nextBtn.addEventListener('click', () =>{
       this.setActiveOnArrowClick(root, number => ((number + 1) % 4));
     });
+  }
+
+  private createClone(root: HTMLElement) : HTMLElement{
+    const clone = root.cloneNode(true) as HTMLElement;
+    clone.querySelector('.content-ctn')!.remove();
+    clone.className = 'section-product-clone';
+    return clone;
   }
 
 
@@ -36,13 +88,15 @@ class Carousel{
     let current: number = Number(currentImage.dataset.current);
     current = fn(current);
     currentImage.dataset.current = String(current);
-    const image = this.thumbnails[current].querySelector('img') as HTMLImageElement;
+    const thumbnails = root.querySelectorAll('.thumbnail-ctn') as NodeListOf<HTMLElement>;
+    const image = thumbnails[current].querySelector('img') as HTMLImageElement;
     this.setActive(root, image.src);
   }
 
   
-  private setActive(root: HTMLElement, src : string){  
-    this.thumbnails.forEach((thumbnail) => {
+  private setActive(root: HTMLElement, src : string){ 
+    const thumbnails = root.querySelectorAll('.thumbnail-ctn') as NodeListOf<HTMLElement>; 
+    thumbnails.forEach((thumbnail) => {
       const image = thumbnail.querySelector('img') as HTMLImageElement;
       if(image.src === src){
         thumbnail.classList.add('active');
@@ -61,9 +115,6 @@ class Carousel{
     const imageSrc = thumbnailSrc.slice(0, index);
     return imageSrc + '.jpg';
   }
-
-
-
 
 }
 

@@ -27,33 +27,6 @@ $sm: 350px;
 }
 
 
-@mixin padding-container($left: true, $right: true){
-
-  @if $right {
-    padding-right: calc(50% - 650px);
-
-    @include media($xl){
-      padding-right: calc(50% - 550px);    
-    }  
-    @include media($lg){
-      padding-right: 0px;     
-    }   
-  }
-
-
-  @if $left {
-    padding-left: calc(50% - 650px);
-
-    @include media($xl){     
-      padding-left: calc(50% - 550px);  
-    }  
-    @include media($lg){      
-      padding-left: 0px;
-    }
-  }
-}
-
-
 @mixin margin-container{
 
   max-width: 1300px;
@@ -70,6 +43,25 @@ $sm: 350px;
     margin-left: 0px;   
   }  
 }
+
+
+@mixin padding-container{
+
+  padding-right: calc(50% - 650px);
+  padding-left: calc(50% - 650px);
+  
+  @include media($xl){    
+    padding-right: calc(50% - 550px);  
+    padding-left: calc(50% - 550px);  
+  }  
+  
+  @include media($lg){    
+    padding-right: 0px;  
+    padding-left: 0px;   
+  }  
+}
+
+
 
 
 
