@@ -1,0 +1,139 @@
+
+//breakpoints
+$xl: 1500px;
+$lg: 1180px;
+$md: 700px;
+$sm: 350px;
+
+
+@mixin media($breakpoint){
+  @media screen and (max-width: $breakpoint){
+    @content;
+  }
+}
+
+
+@mixin media-tablet(){
+  @media screen and (min-width: calc($md + 1px)) and (max-width: $lg){
+    @content;
+  }
+}
+
+
+@mixin hide-on($breakpoint){
+  @include media($breakpoint){
+    display: none !important;
+  }
+}
+
+
+@mixin padding-container($left: true, $right: true){
+
+  @if $right {
+    padding-right: calc(50% - 650px);
+
+    @include media($xl){
+      padding-right: calc(50% - 550px);    
+    }  
+    @include media($lg){
+      padding-right: 0px;     
+    }   
+  }
+
+
+  @if $left {
+    padding-left: calc(50% - 650px);
+
+    @include media($xl){     
+      padding-left: calc(50% - 550px);  
+    }  
+    @include media($lg){      
+      padding-left: 0px;
+    }
+  }
+}
+
+
+@mixin margin-container{
+
+  max-width: 1300px;
+  margin-right: calc(50% - 650px);
+  margin-left: calc(50% - 650px);
+  @include media($xl){
+    max-width: 1100px;
+    margin-right: calc(50% - 550px);  
+    margin-left: calc(50% - 550px);  
+  }  
+  @include media($lg){
+    max-width: 100%;
+    margin-right: 0px;  
+    margin-left: 0px;   
+  }  
+}
+
+
+
+
+@mixin color($background-color, $text-color){
+  background-color: $background-color;
+  color: $text-color;
+}
+
+
+@mixin size($width, $height){
+  width: $width;
+  height: $height;
+}
+
+
+@mixin flex($direction : row, $justify: center, $align-items: center){
+  display: flex; 
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align-items;  
+}
+
+
+
+
+@mixin horizontal-gap($size){  
+  &:not(:first-child){
+    margin-left: $size;
+  }  
+}
+
+
+@mixin btn {  
+  cursor: pointer;
+  padding: 8px 16px; 
+  border: none;
+  border-radius: 5px;  
+}
+
+
+@mixin link {
+  @include btn;
+  text-decoration: none;
+}
+
+
+@mixin border-box{
+  box-sizing: border-box;
+
+  *, *:after, *:before{
+    box-sizing: border-box;
+  }
+}
+
+
+@mixin link-no-decoration{  
+  text-decoration: none;
+  color: inherit;
+}
+
+
+@mixin ul-no-decoration{
+  list-style-type: none;
+  margin: 0px;
+  padding: 0px;
+}

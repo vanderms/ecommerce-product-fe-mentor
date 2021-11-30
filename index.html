@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> Ecommerce Product </title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+ 
+  <nav class="navbar-component close">
+    <div class='logo-and-links'>    
+      <img class='logo' src="./assets/logo.svg" alt="sneakers logo">
+    
+      <ul class="primary-links">
+        <li><a href="#">Collections</a></li>     
+        <li><a href="#">Men</a></li>
+        <li><a href="#">Women</a></li>
+        <li><a href="#">About</a></li>       
+        <li><a href="#">Contact</a></li>  
+      </ul>
+    </div>
+
+    <div class="user-and-cart">
+      <img class='cart' src="./assets/icon-cart.svg" alt="icon cart">
+      <img class='avatar' src="./assets/image-avatar.png" alt="user's avatar">
+    </div>
+     
+  </nav>
+
+  <nav class="sidebar-component close">
+    <ul class="primary-links">
+      <li><a href="#">Collections</a></li>     
+      <li><a href="#">Men</a></li>
+      <li><a href="#">Women</a></li>
+      <li><a href="#">About</a></li>       
+      <li><a href="#">Contact</a></li>  
+    </ul>
+  </nav>
+
+  <div class="fixed-nav-placeholder-component"></div>  
+  
+<main>
+  <section class="section-product">
+    <div class="pictures-ctn">
+      <img class='picture' src="./assets/image-product-1.jpg" alt="product thumbnail">
+      <div class="thumbnails">
+        <img src="./assets/image-product-1-thumbnail.jpg" alt="thumbnail 1">
+        <img src="./assets/image-product-2-thumbnail.jpg" alt="thumbnail 2">
+        <img src="./assets/image-product-3-thumbnail.jpg" alt="thumbnail 3">
+        <img src="./assets/image-product-4-thumbnail.jpg" alt="thumbnail 4">        
+      </div>
+    </div>
+    <div class="content-ctn">
+      <header>
+        <div>SNEAKER COMPANY</div>
+        <h2>Fall Limited Edition Sneakers</h2>
+        <p>These low-profile sneakers are your perfect casual wear companion. Featuring a durable rubber outer sole, they'll withstand everything weather can offer.</p>
+      </header>
+      <div class="price-ctn">
+        <div class="price-with-discount">
+          <span class="price">$125.00</span>
+          <span class="discount">50%</span>
+        </div>
+        <div class="price-without-discount">$250.00</div>
+      </div>
+      <div class='cart-form'>
+        <button class="minus-btn">
+          <svg width="12" height="4" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><path d="M11.357 3.332A.641.641 0 0 0 12 2.69V.643A.641.641 0 0 0 11.357 0H.643A.641.641 0 0 0 0 .643v2.046c0 .357.287.643.643.643h10.714Z" id="a"/></defs><use fill="#FF7E1B" fill-rule="nonzero" xlink:href="#a"/></svg>
+        </button>
+        <input type="text">
+        <button class='plus-btn'>
+          <svg width="12" height="12" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><path d="M12 7.023V4.977a.641.641 0 0 0-.643-.643h-3.69V.643A.641.641 0 0 0 7.022 0H4.977a.641.641 0 0 0-.643.643v3.69H.643A.641.641 0 0 0 0 4.978v2.046c0 .356.287.643.643.643h3.69v3.691c0 .356.288.643.644.643h2.046a.641.641 0 0 0 .643-.643v-3.69h3.691A.641.641 0 0 0 12 7.022Z" id="b"/></defs><use fill="#FF7E1B" fill-rule="nonzero" xlink:href="#b"/></svg>
+        </button>
+        <button class="add-to-cart"></button>
+      </form>
+    </div>
+  </section>
+</main>
+
+
+  <script src="bundle.js"></script>
+</body>
+</html>

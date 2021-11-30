@@ -1,0 +1,161 @@
+@import '../../scss/mixins.scss';
+
+
+// VARIABLES (all can be customized with a css var with same name)
+$navbar-desktop-height: var(--navbar-desktop-height, 80px);
+$navbar-mobile-height: var(--navbar-mobile-height, 56px);
+$navbar-color: var(--navbar-color, white);
+$navbar-link-active-color: var(--navbar-link-active-color, #00bb94);
+$navbar-bg-color: var(--navbar-bg-color, black);
+$navbar-btn-color: var(--navbar-btn-color, white);
+
+
+// MIXINS
+@mixin btn {  
+  display: none;
+  @include media($lg){   
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: $navbar-mobile-height;
+    width: $navbar-mobile-height;      
+    padding: 2px;
+    border: none;
+    background-color: inherit;
+    cursor: pointer;   
+  }  
+}
+
+@mixin navegation-link {
+  a {
+    @include link-no-decoration;
+    cursor: pointer;
+    &.active{
+      color: $navbar-link-active-color;
+    }
+  }
+}
+
+
+// NAVBAR COMPONENT
+.navbar-component {
+  @include flex(row, space-between, center);
+  @include size(100%, $navbar-desktop-height);
+  @include navegation-link();
+  position: fixed; 
+  color: $navbar-color;
+  background-color: $navbar-bg-color;
+  z-index: 100;
+
+  @include media($lg){
+    height: $navbar-mobile-height;
+  }
+  
+
+  .menu-btn {
+    display: none;    
+    &.close {
+      @include btn;
+      .hamburguer {
+        @include flex(column, space-between, center);
+        @include size(20px, 14px);
+        span {
+          border-top: 2px solid $navbar-btn-color;
+          width: 100%;
+          display: inline-block;
+        }
+      }
+    }
+  }
+
+  ul {
+    @include hide-on($lg);
+    @include ul-no-decoration;  
+    display: grid;
+    grid-auto-flow: column;
+    align-items: center;
+    gap: 50px;  
+  }
+}
+
+
+//SIDEBAR COMPONENT
+.sidebar-component{
+  display: none;
+
+  @include media($lg){
+    @include size(Min(400px, 90%), 100vh);
+    @include flex(column, flex-start, center);   
+    @include navegation-link();
+    transition: left 0.25s;
+    left: 0px;
+    top: 0px;
+    z-index: 102;
+    position: fixed;
+    background-color: $navbar-bg-color;
+
+    &.close {
+      left: -100%;
+    }
+   
+    ul {      
+      @include ul-no-decoration;  
+      display: grid;
+      grid-auto-flow: row;
+      align-items: center;
+      gap: 20px;   
+    }
+  }
+
+  @include media($sm){
+    @include size(100%, 100vh);
+  }
+
+  .btn-close {
+    @include btn;
+    align-self: flex-end;
+    .css-image {
+      transform: rotate(45deg);
+      position: relative;
+      @include size(18px, 18px);
+      span:first-child{
+        position: absolute;
+        top: 8px;
+        border-top: 2px solid $navbar-btn-color;
+        width: 18px;
+        left: 0px;
+      }
+      span:last-child{
+        position: absolute;
+        height: 18px;
+        left: 8px;
+        border-left: 2px solid $navbar-btn-color;
+      }
+    }
+  } 
+}
+
+.sidebar-component-backdrop {
+  display: none;
+  @include media($lg){
+    display: block;
+    position: fixed;
+    @include size(100%, 100vh);
+    opacity: 0.75;      
+    background-color: black;
+    top: 0px;
+    left: 0px; 
+    z-index: 101;     
+    &.close{ 
+      display: none; 
+    }
+  } 
+} 
+
+
+.fixed-nav-placeholder-component{
+  height: $navbar-desktop-height;
+  @include media($lg){
+    height:$navbar-mobile-height;  
+  }
+}
