@@ -10,6 +10,16 @@ $navbar-bg-color: var(--navbar-bg-color, black);
 $navbar-btn-color: var(--navbar-btn-color, white);
 
 
+body::before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: var(--navbar-desktop-height);
+  @include media($lg){
+    height: var(--navbar-mobile-height);
+  }
+}
+
 // MIXINS
 @mixin btn {  
   display: none;
@@ -43,6 +53,7 @@ $navbar-btn-color: var(--navbar-btn-color, white);
   @include size(100%, $navbar-desktop-height);
   @include navegation-link();
   position: fixed; 
+  top: 0px;  
   color: $navbar-color;
   background-color: $navbar-bg-color;
   z-index: 100;
@@ -151,11 +162,3 @@ $navbar-btn-color: var(--navbar-btn-color, white);
     }
   } 
 } 
-
-
-.fixed-nav-placeholder-component{
-  height: $navbar-desktop-height;
-  @include media($lg){
-    height:$navbar-mobile-height;  
-  }
-}
