@@ -61,6 +61,7 @@ body {
 
   a {
     color: var(--dark-grayish-blue);
+    font-size: 15px;
   }
 
   .logo-and-links {
@@ -126,6 +127,10 @@ body {
     ul{    
       margin-top: 50px;
       font-weight: 700;
+
+      a {
+        font-size: 18px;
+      }
     }
   }
 }
@@ -135,16 +140,27 @@ body {
   padding-top: 90px;
   padding-bottom: 120px;
   display: grid;
-  grid-template-columns: repeat(2, 450px);
+  grid-template-columns: repeat(2, 450px);  
   gap: 20px;
   justify-content: space-around;
 
+  @include media($lg){
+    grid-template-columns: 450px;
+  }
+
+  @include media($md){
+    grid-template-columns: 100%;
+    padding-top: 0px;
+  }
 
   .pictures-ctn{
     .picture{
       width: 100%;
       height: auto;
       border-radius: 20px;
+      @include media($md){
+        border-radius: 0px;
+      }
     }
 
     .thumbnails { 
@@ -152,6 +168,7 @@ body {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 30px;
+      @include hide-on($md);
 
       img{
         width: 100%;
@@ -162,7 +179,11 @@ body {
   }
 
   .content-ctn{
-    padding-top: 60px;  
+    padding-top: 60px; 
+    @include media($md){
+      padding: 0px 25px;
+      
+    } 
     header{
       div{
         font-size: 14px;
@@ -174,19 +195,30 @@ body {
         font-weight: 700;
         color: var(--very-dark-blue);
         margin: 20px 0px 0px 0px;
+        @include media($md){
+          font-size: 28px;
+        }
       }
       p{
         line-height: 1.6;
         color: var(--dark-grayish-blue);
         margin: 45px 0px 0px 0px;
+        @include media($md){
+          margin-top: 26px;
+        }
       }
     }
 
     .price-ctn {
-      margin-top: 35px;
+      margin-top: 36px;
       display: grid;
       grid-auto-flow: row;
       gap: 16px;
+
+      @include media($lg){
+        grid-auto-flow: column;
+        justify-content: space-between;
+      }
 
       .price-with-discount{
         display: grid;
@@ -224,7 +256,13 @@ body {
       grid-auto-flow: column;
       justify-content: start;
       align-items: center;
-      gap: 20px;   
+      gap: 20px;
+
+      @include media($md){
+        grid-auto-flow: row;
+        grid-template-columns: 100%;
+        margin-top: 30px;
+      }
 
       .quantity-ctn{
         @include size(160px, 56px);
@@ -233,6 +271,11 @@ body {
         grid-auto-flow: column;
         align-items: center;
         justify-content: space-evenly;
+        @include media($md){
+          width: 100%;
+          justify-content: space-between;
+          padding: 0px 20px;          
+        }
 
         button{
           @include size(24px, 24px);
@@ -265,11 +308,10 @@ body {
         svg{
           transform: scale(0.75);
         }
+        @include media($md){
+          width: 100%;
+        }
       }
     }
-
-
   }
-
-
 }
