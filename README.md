@@ -8,7 +8,6 @@ This is a solution to the [E-commerce product page challenge on Frontend Mentor]
   - [The challenge](#the-challenge)
   - [Screenshot](#screenshot)
   - [Links](#links)
-- [My process](#my-process)
   - [Built with](#built-with)
 - [Author](#author)
 
@@ -32,7 +31,7 @@ Users should be able to:
 ### Links
 
 - Solution URL: [Add solution URL here](https://your-solution-url.com)
-- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
+- Live Site URL: [Add live site URL here](https://vanderms.github.io/ecommerce-product-fe-mentor/)
 
 ## My process
 
@@ -47,9 +46,9 @@ Users should be able to:
 
 ## Author
 
-- Website - [Add your name here](https://www.your-site.com)
-- Frontend Mentor - [@yourusername](https://www.frontendmentor.io/profile/yourusername)
-- Twitter - [@yourusername](https://www.twitter.com/yourusername)
+- Website - [vanderms](https://vanderms.github.io)
+- Frontend Mentor - [@vanderms](https://www.frontendmentor.io/profile/vanderms)
+- Linkedin - [Vander Santos](https://www.linkedin.com/in/vanderms/)
 
 
 

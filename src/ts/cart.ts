@@ -1,32 +1,35 @@
+
+
 class Cart {
   
   private static instance: Cart | null  = null;  
   private quantity: number;
+  private modalIsOpen: boolean;
 
   private constructor(){
     
     this.quantity = 0;
+    this.modalIsOpen = false;
     this.setupCartForm();
     this.setupCardCheckout();
   }
  
   private setupCardCheckout(){
-    const card = document.querySelector('.checkout-card-component') as HTMLElement;
+    const modal= document.querySelector('.checkout-card-component') as HTMLElement;
     const cartBtn = document.querySelector('.navbar-component .cart-btn') as HTMLElement;
-    const clearBtn = card.querySelector('.clear') as HTMLElement;
-    const checkoutBtn = card.querySelector('.checkout-btn') as HTMLElement;   
+    const clearBtn = modal.querySelector('.clear') as HTMLElement;
+    const checkoutBtn = modal.querySelector('.checkout-btn') as HTMLElement;   
 
-    cartBtn.addEventListener('focus', ()=>{      
-      card.classList.remove('close');    
-      card.focus();       
-    })    
+    cartBtn.addEventListener('click', ()=>{      
+      modal.classList.toggle('close');
+      this.modalIsOpen = !this.modalIsOpen;     
+    })
 
-    document.addEventListener('focusout', ()=>{
-      setTimeout(()=>{        
-        if([card, cartBtn, checkoutBtn, clearBtn].indexOf(<HTMLElement>document.activeElement) == -1){
-          card.classList.add('close');
-        }
-      }, 25)
+    document.addEventListener('click', (e)=> {      
+      if(this.clickedOutsideModal(<HTMLElement>e.target, modal, cartBtn)){
+        modal.classList.add('close');
+        this.modalIsOpen = false;
+      }
     });
     
     
@@ -62,6 +65,12 @@ class Cart {
 
   }
 
+  clickedOutsideModal (node: HTMLElement, modal: HTMLElement, cart: HTMLElement): boolean {
+    if(node == modal || node == cart) return false;  
+    if(node == document.body) return true;
+    return this.clickedOutsideModal(node.parentElement!, modal, cart);
+  }
+
   private clearCart(){
     this.quantity = 0;
     this.updateCart();    
@@ -74,18 +83,18 @@ class Cart {
 
   private updateCart(){
     const cart = document.querySelector('.navbar-component .cart-btn .items') as HTMLElement;
-    const card = document.querySelector('.checkout-card-component') as HTMLElement;
+    const modal= document.querySelector('.checkout-card-component') as HTMLElement;
     cart.textContent = String(this.quantity);
     if(this.quantity > 0){
       cart.classList.remove('hidden');
-      card.classList.remove('empty');
+      modal.classList.remove('empty');
     } else{
       cart.classList.add('hidden');
-      card.classList.add('empty');
+      modal.classList.add('empty');
     }
     
-    const quantity = card.querySelector('.data .quantity') as HTMLElement;
-    const total = card.querySelector('.data .total') as HTMLElement;
+    const quantity = modal.querySelector('.data .quantity') as HTMLElement;
+    const total = modal.querySelector('.data .total') as HTMLElement;
     quantity.textContent = String(this.quantity);
     total.textContent = `$${this.quantity * 125}.00`;
 
@@ -95,6 +104,8 @@ class Cart {
     return Cart.instance ? Cart.instance : (Cart.instance = new Cart());  
   }  
 }
+
+
 
 
 export default Cart.getInstance();
