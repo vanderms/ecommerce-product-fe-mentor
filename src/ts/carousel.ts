@@ -1,10 +1,11 @@
 
-class Carousel{
+class Carousel {
   
   private scrollY: number = 0;
+  private static instance: Carousel | null  = null; 
  
   constructor(){
-    const root = document.querySelector('.section-product') as HTMLElement;
+    const root = <HTMLElement> document.querySelector('.section-product');
     const clone = this.createClone(root);
    
  
@@ -15,15 +16,15 @@ class Carousel{
     this.setThumbnails(clone);
     this.setArrows(clone);
 
-    const image = root.querySelector('.picture') as HTMLElement;
+    const image = <HTMLElement> root.querySelector('.picture');
     image.addEventListener('click', () => this.openClone(clone, root));
     
-    const closeModal = clone.querySelector('.close-modal') as HTMLElement;
+    const closeModal = <HTMLElement> clone.querySelector('.close-modal');
     closeModal.addEventListener('click', ()=>{
       this.closeClone(clone, root);
     })
 
-    const backdrop = clone.querySelector('.backdrop') as HTMLElement;
+    const backdrop = <HTMLElement> clone.querySelector('.backdrop');
     
     backdrop.addEventListener('click', ()=>{
       this.closeClone(clone, root);
@@ -36,7 +37,7 @@ class Carousel{
     
     
     this.setActiveByCurrentImage(clone, () =>{
-      const currentImage = root.querySelector('.picture') as HTMLElement;
+      const currentImage = <HTMLElement> root.querySelector('.picture');
       let current: number = Number(currentImage.dataset.current);
       return current;
     });
@@ -62,28 +63,28 @@ class Carousel{
 
 
   private setThumbnails(root: HTMLElement){
-    const thumbnails = root.querySelectorAll('.thumbnail-ctn') as NodeListOf<HTMLElement>;
+    const thumbnails = <NodeListOf<HTMLElement>> root.querySelectorAll('.thumbnail-ctn');
     thumbnails.forEach(thumbnail => {     
-      const image = thumbnail.querySelector('img') as HTMLImageElement;     
+      const image = <HTMLImageElement> thumbnail.querySelector('img');     
       thumbnail.addEventListener('click', () => this.setActive(root, image.src));
     });
   }
 
 
   private setArrows(root: HTMLElement){
-    const previousBtn = root.querySelector('.previous-btn') as HTMLElement;    
+    const previousBtn = <HTMLElement>root.querySelector('.previous-btn');    
     previousBtn.addEventListener('click', () =>{
       this.setActiveByCurrentImage(root, number => ((number + 3) % 4));
     });
 
-    const nextBtn = root.querySelector('.next-btn') as HTMLElement;    
+    const nextBtn = <HTMLElement> root.querySelector('.next-btn');    
     nextBtn.addEventListener('click', () =>{
       this.setActiveByCurrentImage(root, number => ((number + 1) % 4));
     });
   }
 
   private createClone(root: HTMLElement) : HTMLElement{
-    const clone = root.cloneNode(true) as HTMLElement;
+    const clone = <HTMLElement> root.cloneNode(true);
     clone.querySelector('.content-ctn')!.remove();
     clone.className = 'section-product-clone';
     return clone;
@@ -91,23 +92,23 @@ class Carousel{
 
 
   private setActiveByCurrentImage(root: HTMLElement, fn: (x: number) => number){
-    const currentImage = root.querySelector('.picture') as HTMLElement;
+    const currentImage = <HTMLElement> root.querySelector('.picture');
     let current: number = Number(currentImage.dataset.current);
     current = fn(current);
     currentImage.dataset.current = String(current);
-    const thumbnails = root.querySelectorAll('.thumbnail-ctn') as NodeListOf<HTMLElement>;
-    const image = thumbnails[current].querySelector('img') as HTMLImageElement;
+    const thumbnails = <NodeListOf<HTMLElement>>root.querySelectorAll('.thumbnail-ctn');
+    const image = <HTMLImageElement> thumbnails[current].querySelector('img');
     this.setActive(root, image.src);
   }
 
   
   private setActive(root: HTMLElement, src : string){ 
-    const thumbnails = root.querySelectorAll('.thumbnail-ctn') as NodeListOf<HTMLElement>; 
+    const thumbnails = <NodeListOf<HTMLElement>>root.querySelectorAll('.thumbnail-ctn'); 
     thumbnails.forEach((thumbnail, index) => {
-      const image = thumbnail.querySelector('img') as HTMLImageElement;
+      const image = <HTMLImageElement> thumbnail.querySelector('img');
       if(image.src === src){
         thumbnail.classList.add('active');
-        const currentImage = root.querySelector('.picture') as HTMLImageElement;
+        const currentImage = <HTMLImageElement> root.querySelector('.picture');
         currentImage.src = this.getImageSrc(src);
         currentImage.dataset.current = String(index);
       }
@@ -124,7 +125,11 @@ class Carousel{
     return imageSrc + '.jpg';
   }
 
+
+  static getInstance() : Carousel{
+    return Carousel.instance ? Carousel.instance : (Carousel.instance = new Carousel());  
+  }  
 }
 
 
-export default new Carousel();
+export default Carousel.getInstance();

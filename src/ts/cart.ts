@@ -15,10 +15,10 @@ class Cart {
   }
  
   private setupCardCheckout(){
-    const modal= document.querySelector('.checkout-card-component') as HTMLElement;
-    const cartBtn = document.querySelector('.navbar-component .cart-btn') as HTMLElement;
-    const clearBtn = modal.querySelector('.clear') as HTMLElement;
-    const checkoutBtn = modal.querySelector('.checkout-btn') as HTMLElement;   
+    const modal= <HTMLElement> document.querySelector('.checkout-card-component');
+    const cartBtn = <HTMLElement> document.querySelector('.navbar-component .cart-btn');
+    const clearBtn = <HTMLElement> modal.querySelector('.clear');
+    const checkoutBtn = <HTMLElement> modal.querySelector('.checkout-btn');   
 
     cartBtn.addEventListener('click', ()=>{      
       modal.classList.toggle('close');
@@ -40,11 +40,11 @@ class Cart {
   }
 
   private setupCartForm(){
-    const cartForm = document.querySelector('.cart-form') as HTMLElement;
-    const minusBtn = cartForm.querySelector('.minus-btn') as HTMLElement;
-    const plusBtn = cartForm.querySelector('.plus-btn') as HTMLElement;
-    const quantity = cartForm.querySelector('.quantity') as HTMLElement;
-    const addBtn = cartForm.querySelector('.add-to-cart') as HTMLElement;
+    const cartForm = <HTMLElement> document.querySelector('.cart-form');
+    const minusBtn = <HTMLElement> cartForm.querySelector('.minus-btn');
+    const plusBtn = <HTMLElement> cartForm.querySelector('.plus-btn');
+    const quantity = <HTMLElement> cartForm.querySelector('.quantity');
+    const addBtn = <HTMLElement>cartForm.querySelector('.add-to-cart');
 
     minusBtn.addEventListener('click', ()=>{
       let current = Number(quantity.textContent);
@@ -82,8 +82,8 @@ class Cart {
   }
 
   private updateCart(){
-    const cart = document.querySelector('.navbar-component .cart-btn .items') as HTMLElement;
-    const modal= document.querySelector('.checkout-card-component') as HTMLElement;
+    const cart = <HTMLElement> document.querySelector('.navbar-component .cart-btn .items');
+    const modal= <HTMLElement> document.querySelector('.checkout-card-component');
     cart.textContent = String(this.quantity);
     if(this.quantity > 0){
       cart.classList.remove('hidden');
@@ -93,8 +93,8 @@ class Cart {
       modal.classList.add('empty');
     }
     
-    const quantity = modal.querySelector('.data .quantity') as HTMLElement;
-    const total = modal.querySelector('.data .total') as HTMLElement;
+    const quantity = <HTMLElement> modal.querySelector('.data .quantity');
+    const total = <HTMLElement> modal.querySelector('.data .total');
     quantity.textContent = String(this.quantity);
     total.textContent = `$${this.quantity * 125}.00`;
 
@@ -104,8 +104,5 @@ class Cart {
     return Cart.instance ? Cart.instance : (Cart.instance = new Cart());  
   }  
 }
-
-
-
 
 export default Cart.getInstance();
