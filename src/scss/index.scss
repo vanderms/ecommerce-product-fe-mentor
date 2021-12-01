@@ -103,11 +103,44 @@ body {
       gap: 25px;
     }
 
+    .cart-btn{
+      border: none;
+      background-color: inherit;
+      cursor: pointer;
+      position: relative;
+
+      svg { fill: #69707D; }
+      &:focus{ svg { fill: var(--very-dark-blue);} }
+
+      .items {
+        font-size: 10px;
+        font-weight: 700;
+        line-height: 15px;
+        display: inline-block;
+        @include size(20px, 15px);
+        position: absolute;
+        color: var(--primary-pale);
+        background-color: var(--primary);
+        border-radius: 999px;
+        top: -6px;
+        left: 18px;
+
+        &.hidden{
+          display: none;
+        }
+      }
+     
+    }
+
     .avatar{
       height: 50px;
       width: auto;
+      border-radius: 999px;
       @include media($lg){
         height: 25px;
+      }
+      &:hover{
+        border: 2px solid var(--primary);
       }
     }
   }
@@ -147,3 +180,130 @@ body {
 }
 
 
+.checkout-card-component{
+  @include size(360px, 268px);
+  border-radius: 0px 0px 16px 16px;
+  position: fixed;
+  top: 82px;
+  right: calc(50% - 580px);
+  background-color: white;
+  z-index: 200;
+  box-shadow: 0px 2px 2px 1px rgba(0,0,0,0.2);  
+  transition: top 0.4s ease-out;
+
+
+  @include media($lg){
+    right: 5px;
+    border-radius: 16px;
+    
+  }
+
+  @include media($md){
+    right: calc(50% - 180px);
+    top: 66px;
+  }
+
+  @include media(359px){
+    transform: scale(0.75);
+    top: 40px;
+  }
+
+  &.close{
+    top: -280px;
+    transition: top 0s ease-out;
+  }
+
+  &.empty {
+    .content-ctn, .checkout{
+      display: none;
+    }    
+    .empty-message{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  header{
+    height: 78px;
+    display: grid;
+    align-items: center;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    
+    padding: 0px 25px;
+    
+    h3 {
+      margin: 0px;
+      font-size: 16px;
+    }
+  }
+
+  .content-ctn { 
+
+    padding: 0px 25px;
+    display: grid;
+    grid-template-columns: 50px 1fr 16px;
+    gap: 15px;
+    height: 50px;
+    margin-top: 25px;
+    justify-content: start;
+    align-items: center;
+   
+    .thumbnail {
+      @include size(50px, 50px);
+      border-radius: 5px;
+    }
+
+    .data{
+      line-height: 24px;
+      color: var(--dark-grayish-blue);
+      .total{
+        font-weight: 700;
+        color: black;
+        margin-left: 12px;
+      }
+    }
+
+    button {
+      @include size(15px, 26px);
+      cursor: pointer;
+      padding: 0px;
+      border: none;
+    }
+  }
+
+
+
+  .empty-message{
+    @include size(100%, 190px);
+    display: none;    
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+    color: var(--dark-grayish-blue);
+  }
+
+  .checkout{
+    height: 115px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .checkout-btn{
+      @include size(310px, 60px);
+      line-height: 60px;
+      text-align: center;
+      background-color: var(--primary);
+      color: var(--primary-pale);
+      border: none;
+      border-radius: 12px;
+      font-weight: 700;
+      cursor: pointer;
+
+    }
+
+  }
+
+  
+
+
+}
