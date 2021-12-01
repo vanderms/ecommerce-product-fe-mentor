@@ -34,7 +34,14 @@ class Carousel{
 
   private openClone(clone : HTMLElement, root: HTMLElement){   
     
-    document.body.appendChild(clone);
+    
+    this.setActiveByCurrentImage(clone, () =>{
+      const currentImage = root.querySelector('.picture') as HTMLElement;
+      let current: number = Number(currentImage.dataset.current);
+      return current;
+    });
+
+    document.body.appendChild(clone);    
     const y: number = root.getBoundingClientRect().y;
     this.scrollY = window.scrollY;
         
@@ -50,7 +57,7 @@ class Carousel{
     clone.remove();
     root.setAttribute('style', '');    
     window.scrollTo(0, this.scrollY);
-    
+   
   }
 
 
@@ -66,12 +73,12 @@ class Carousel{
   private setArrows(root: HTMLElement){
     const previousBtn = root.querySelector('.previous-btn') as HTMLElement;    
     previousBtn.addEventListener('click', () =>{
-      this.setActiveOnArrowClick(root, number => ((number + 3) % 4));
+      this.setActiveByCurrentImage(root, number => ((number + 3) % 4));
     });
 
     const nextBtn = root.querySelector('.next-btn') as HTMLElement;    
     nextBtn.addEventListener('click', () =>{
-      this.setActiveOnArrowClick(root, number => ((number + 1) % 4));
+      this.setActiveByCurrentImage(root, number => ((number + 1) % 4));
     });
   }
 
@@ -83,7 +90,7 @@ class Carousel{
   }
 
 
-  private setActiveOnArrowClick(root: HTMLElement, fn: (x: number) => number){
+  private setActiveByCurrentImage(root: HTMLElement, fn: (x: number) => number){
     const currentImage = root.querySelector('.picture') as HTMLElement;
     let current: number = Number(currentImage.dataset.current);
     current = fn(current);
@@ -96,12 +103,13 @@ class Carousel{
   
   private setActive(root: HTMLElement, src : string){ 
     const thumbnails = root.querySelectorAll('.thumbnail-ctn') as NodeListOf<HTMLElement>; 
-    thumbnails.forEach((thumbnail) => {
+    thumbnails.forEach((thumbnail, index) => {
       const image = thumbnail.querySelector('img') as HTMLImageElement;
       if(image.src === src){
         thumbnail.classList.add('active');
         const currentImage = root.querySelector('.picture') as HTMLImageElement;
         currentImage.src = this.getImageSrc(src);
+        currentImage.dataset.current = String(index);
       }
       else {
         thumbnail.classList.remove('active');
