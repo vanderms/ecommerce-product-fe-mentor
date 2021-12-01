@@ -59,8 +59,20 @@ body {
   }  
 
   a {
+    position: relative;
+    display: inline-block;
     color: var(--dark-grayish-blue);
     font-size: 15px;
+    line-height: 25px;
+  }
+
+  a:hover::after{
+    position: absolute;
+    content: '';
+    width: 100%;        
+    top: 64px;
+    left: 0px;
+    border-bottom: 4px solid var(--primary);
   }
 
   .logo-and-links {
